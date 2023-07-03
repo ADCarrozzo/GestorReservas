@@ -26,9 +26,11 @@ namespace GestorReservas.Models
         public string Apellido { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un mail")]
+        [EmailAddress(ErrorMessage = "Ingrese un mail valido")]
         public string Mail { get; set; }
 
         [Required(ErrorMessage = "Debe ingresar un telefono")]
+        [Phone(ErrorMessage ="ingrese un telefono valido")]
         public string Telefono { get; set; }
 
         public virtual ICollection<Reserva> Reserva { get; set; }

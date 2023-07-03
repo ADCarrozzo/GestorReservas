@@ -10,7 +10,7 @@ html {
   -webkit-text-size-adjust: 100%;
 }
 body {
-  margin: 0;
+    margin: 0;
 }
 article,
 aside,
@@ -1085,8 +1085,8 @@ body {
   font-family: "Helvetica Neue", Helvetica, Arial, sans-serif;
   font-size: 14px;
   line-height: 1.42857143;
-  color: #333333;
-  background-color: #fff;
+  color: beige;
+  background-color: dimgray;
 }
 input,
 button,
@@ -1097,12 +1097,12 @@ textarea {
   line-height: inherit;
 }
 a {
-  color: #337ab7;
+  color: red;
   text-decoration: none;
 }
 a:hover,
 a:focus {
-  color: #23527c;
+  color: darkred;
   text-decoration: underline;
 }
 a:focus {
@@ -1183,7 +1183,7 @@ h6,
 .h4,
 .h5,
 .h6 {
-  font-family: inherit;
+  font-family: 'Bebas Neue';
   font-weight: 500;
   line-height: 1.1;
   color: inherit;
@@ -1288,6 +1288,7 @@ h6,
 }
 p {
   margin: 0 0 10px;
+  font-family:Helvetica
 }
 .lead {
   margin-bottom: 20px;
@@ -5032,16 +5033,17 @@ a.badge:focus {
   margin-left: 3px;
 }
 .jumbotron {
-  padding-top: 30px;
-  padding-bottom: 30px;
-  margin-bottom: 30px;
-  color: inherit;
-  background-color: #eeeeee;
+    padding-top: 30px;
+    padding-bottom: 30px;
+    margin-bottom: 30px;
+    color: inherit;
+    background-image: url("mesas-restaurant.jpg");
 }
-.jumbotron h1,
-.jumbotron .h1 {
-  color: inherit;
-}
+    .jumbotron h1,
+    .jumbotron .h1 {
+        color: white;
+        text-shadow: 5px 5px 10px black;
+    }
 .jumbotron p {
   margin-bottom: 15px;
   font-size: 21px;
