@@ -21,11 +21,11 @@ namespace GestorReservas.Models
         public DateTime Fecha { get; set; }
 
         [Required(ErrorMessage = "Debe seleccionar un cliente registrado")]
-        [Display(Name = "ID cliente")]
+        [Display(Name = "Cliente")]
         public int ClienteId { get; set; }
 
-        [Required(ErrorMessage = "Debe seleccionar un numero de mesa")]
-        [Display(Name = "ID Producto")]
+        [Required(ErrorMessage = "Debe seleccionar un número de mesa")]
+        [Display(Name = "Mesa")]
         public int MesaId { get; set; }
 
         public Cliente Cliente { get; set; }

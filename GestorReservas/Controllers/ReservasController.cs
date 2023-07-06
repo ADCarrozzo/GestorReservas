@@ -90,6 +90,8 @@ namespace GestorReservas.Controllers
         {
             if (ModelState.IsValid)
             {
+                //llamar funcion booleana pasando reserva por parametro, si encuentra una igual devuelve falso si no devuelve true.
+                reservaExistente(reserva);
                 db.Entry(reserva).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -132,6 +134,19 @@ namespace GestorReservas.Controllers
                 db.Dispose();
             }
             base.Dispose(disposing);
+        }
+
+        private Boolean reservaExistente(Reserva reserva)
+        {
+            Boolean existe = false;
+            var context = new ReservasContext();
+                if ((from r in context.Reserva
+                     where r.Cliente.Nombre == reserva.Cliente.Nombre && r.Fecha == reserva.Fecha && r.MesaId == reserva.MesaId
+                     select r) != null){
+                existe = true;
+            }
+
+            return existe;
         }
     }
 }

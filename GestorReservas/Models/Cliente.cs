@@ -31,6 +31,7 @@ namespace GestorReservas.Models
 
         [Required(ErrorMessage = "Debe ingresar un telefono")]
         [Phone(ErrorMessage ="ingrese un telefono valido")]
+        [Display(Name = "Teléfono")]
         public string Telefono { get; set; }
 
         public virtual ICollection<Reserva> Reserva { get; set; }

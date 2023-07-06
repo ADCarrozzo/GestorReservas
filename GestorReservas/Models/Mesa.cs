@@ -20,11 +20,15 @@ namespace GestorReservas.Models
         [Key]
         [DatabaseGenerated(DatabaseGeneratedOption.Identity)]
         public int Id { get; set; }
-        [Required(ErrorMessage = "Debe ingresar un numero valido")]
+
+        [Required(ErrorMessage = "Debe ingresar un número valido")]
         [Range(minimum: 0, maximum: 20)]
+        [Display(Name ="Número")]
         public string Numero { get; set; }
+
         [Required(ErrorMessage = "Debe ingresar un número mayor o igual a cero")]
         [Range(minimum: 0, maximum: 9999999)]
+        [Display(Name ="Precio de seña")]
         public decimal PrecioSeña { get; set; }
 
         public virtual ICollection<Reserva> Reserva { get; set; }
