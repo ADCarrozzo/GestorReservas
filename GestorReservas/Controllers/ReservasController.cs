@@ -54,6 +54,15 @@ namespace GestorReservas.Controllers
         {
             if (ModelState.IsValid)
             {
+
+                DateTime f = reserva.Fecha;
+                Console.WriteLine("Se crea una reserva para esta fecha" + reserva.Fecha);
+
+                Reserva re = db.Reservas.Where(r => r.Fecha == f).FirstOrDefault();
+                if(re != null)
+                {
+                    return UnprocessableEntity();
+                }
                 db.Reservas.Add(reserva);
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -62,6 +71,11 @@ namespace GestorReservas.Controllers
             ViewBag.ClienteId = new SelectList(db.Clientes, "Id", "Nombre", reserva.ClienteId);
             ViewBag.MesaId = new SelectList(db.Mesas, "Id", "Numero", reserva.MesaId);
             return View(reserva);
+        }
+
+        private ActionResult UnprocessableEntity()
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Reservas/Edit/5
@@ -91,7 +105,6 @@ namespace GestorReservas.Controllers
             if (ModelState.IsValid)
             {
                 //llamar funcion booleana pasando reserva por parametro, si encuentra una igual devuelve falso si no devuelve true.
-                reservaExistente(reserva);
                 db.Entry(reserva).State = EntityState.Modified;
                 db.SaveChanges();
                 return RedirectToAction("Index");
@@ -136,17 +149,5 @@ namespace GestorReservas.Controllers
             base.Dispose(disposing);
         }
 
-        private Boolean reservaExistente(Reserva reserva)
-        {
-            Boolean existe = false;
-            var context = new ReservasContext();
-                if ((from r in context.Reserva
-                     where r.Cliente.Nombre == reserva.Cliente.Nombre && r.Fecha == reserva.Fecha && r.MesaId == reserva.MesaId
-                     select r) != null){
-                existe = true;
-            }
-
-            return existe;
-        }
     }
 }
