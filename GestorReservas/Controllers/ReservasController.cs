@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using GestorReservas.Data;
 using GestorReservas.Models;
 
@@ -59,12 +60,18 @@ namespace GestorReservas.Controllers
                 Console.WriteLine("Se crea una reserva para esta fecha" + reserva.Fecha);
 
                 Reserva re = db.Reservas.Where(r => r.Fecha == f).FirstOrDefault();
-                if(re != null)
+                try
                 {
-                    return UnprocessableEntity();
+                    if (re != null)
+                    {
+                        return UnprocessableEntity();
+                    }
+                    db.Reservas.Add(reserva);
+                    db.SaveChanges();
+                } catch (NotImplementedException)
+                {
+                    MessageBox.Show("No se puede reservar una mesa ya ocupada.");
                 }
-                db.Reservas.Add(reserva);
-                db.SaveChanges();
                 return RedirectToAction("Index");
             }
 

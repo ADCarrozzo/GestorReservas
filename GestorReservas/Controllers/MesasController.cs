@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using GestorReservas.Data;
 using GestorReservas.Models;
 
@@ -51,12 +52,33 @@ namespace GestorReservas.Controllers
         {
             if (ModelState.IsValid)
             {
+                String numero = mesa.Numero;
+
+                Mesa me = db.Mesas.Where(m => m.Numero == numero).FirstOrDefault();
+
+                try
+                {
+                    if(me != null)
+                    {
+                        return BadRequest();
+                    }
                 db.Mesas.Add(mesa);
                 db.SaveChanges();
+                }
+                catch (NotImplementedException)
+                {
+                    MessageBox.Show("Numero de mesa ya registrado.");
+                }
+                
                 return RedirectToAction("Index");
             }
 
             return View(mesa);
+        }
+
+        private ActionResult BadRequest()
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Mesas/Edit/5
