@@ -6,6 +6,7 @@ using System.Linq;
 using System.Net;
 using System.Web;
 using System.Web.Mvc;
+using System.Windows.Forms;
 using GestorReservas.Data;
 using GestorReservas.Models;
 
@@ -51,12 +52,33 @@ namespace GestorReservas.Controllers
         {
             if (ModelState.IsValid)
             {
-                db.Clientes.Add(cliente);
-                db.SaveChanges();
-                return RedirectToAction("Index");
+                String m = cliente.Mail;
+
+                Cliente cli = db.Clientes.Where(c => c.Mail == m).FirstOrDefault();
+                try
+                {
+                    if (cli != null)
+                    {
+                        return BadRequest();
+                    }
+                    db.Clientes.Add(cliente);
+                    db.SaveChanges();
+                }
+                catch (NotImplementedException)
+                {
+                    MessageBox.Show("Mail ya registrado.");
+                }
+
+
+            return RedirectToAction("Index");
             }
 
             return View(cliente);
+        }
+
+        private ActionResult BadRequest()
+        {
+            throw new NotImplementedException();
         }
 
         // GET: Clientes/Edit/5
